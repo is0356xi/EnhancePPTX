@@ -124,93 +124,12 @@ def create_text_box(
     f.color.rgb = RGBColor(r, g, b)
     return tb
 
-
-def create_rounded_shape(shapes, left, top, width, height, bg_color, radius_pct=0.1):
-    """角丸の図形を作成（枠線なし）"""
-    shape = shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, left, top, width, height)
-    # 角丸設定
-    try:
-        shape.adjustments[0] = int(max(0.0, min(1.0, radius_pct)) * 50000)
-    except Exception:
-        pass
-    # 塗り
-    r, g, b = normalize_color(bg_color)
-    shape.fill.solid()
-    shape.fill.fore_color.rgb = RGBColor(r, g, b)
-    shape.line.fill.background()  # 枠線なし
-    return shape
-
-
 def setup_chart_title(chart, title, font_size=16):
     """チャートのタイトルを設定"""
     if title:
         chart.has_title = True
         chart.chart_title.text_frame.text = title
         chart.chart_title.text_frame.paragraphs[0].font.size = Pt(font_size)
-
-
-def setup_chart_legend(chart, show_legend, position, font_size=12):
-    """チャートの凡例を設定"""
-    if show_legend:
-        chart.has_legend = True
-        chart.legend.position = position
-        chart.legend.include_in_layout = False
-        chart.legend.font.size = Pt(font_size)
-
-
-def setup_chart_data_labels(chart, data_labels_config, font_size=10):
-    """チャートのデータラベルを設定"""
-    if data_labels_config and data_labels_config != "none":
-        plot = chart.plots[0]
-        plot.has_data_labels = True
-        data_labels = plot.data_labels
-        data_labels.font.size = Pt(font_size)
-        return data_labels
-    return None
-
-
-def create_chip_with_text(
-    shapes,
-    left,
-    top,
-    width,
-    height,
-    text,
-    bg_color,
-    radius_pct=0.3,
-    font_size=10,
-    text_color=None,
-):
-    """角丸チップ（塗りつぶし図形）にテキストを配置"""
-    shape = create_rounded_shape(shapes, left, top, width, height, bg_color, radius_pct)
-
-    tf = shape.text_frame
-    tf.clear()
-    tf.word_wrap = True
-    tf.vertical_anchor = MSO_ANCHOR.MIDDLE
-    # 内側マージン
-    try:
-        tf.margin_left = tf.margin_right = Pt(8)
-        tf.margin_top = tf.margin_bottom = Pt(2)
-    except Exception:
-        pass
-    p = tf.paragraphs[0]
-    p.alignment = PP_ALIGN.LEFT
-    p.space_before = 0
-    p.space_after = 0
-    p.text = str(text).strip()
-    f = p.runs[0].font if p.runs else p.font
-    f.size = Pt(font_size)
-    f.bold = False
-    if text_color:
-        r, g, b = normalize_color(text_color)
-        f.color.rgb = RGBColor(r, g, b)
-    else:
-        # 背景に対する黒/白の自動判定
-        bg_hex = rgb_to_hex(*normalize_color(bg_color))
-        f.color.rgb = get_contrast_color(bg_hex)
-    return shape
-
 
 def normalize_color(color_val):
     """HEX(#RRGGBB) or (r,g,b) or [r,g,b] -> (r,g,b)"""
@@ -231,9 +150,6 @@ def get_contrast_color(hex_bg_color):
     else:
         return RGBColor(255, 255, 255)  # 白
 ```
-
-
-
 
 ```py
 from pptx.enum.shapes import MSO_SHAPE, MSO_CONNECTOR
