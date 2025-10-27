@@ -1,0 +1,31 @@
+version: 1
+meta:
+  title: "プロセスフロー（例）"
+  author: "auto"
+  slide_size: { preset: "16x9" }
+
+theme:
+  primary: "#0D6EFD"
+  success: "#198754"
+
+slides:
+  - id: "process_flow"
+    background: "#FFFFFF"
+    components:
+      - tool: "process_flow"
+        id: "proc_01"
+        pos: { x: 4, y: 8, w: 92, h: 80 }
+        data:
+          steps:
+            - description: "A社とAI活用の取り組みを進めていた。"
+              badge: "A社"
+              color: "#0D6EFD"
+            - description: "BさんからC社で課題があると聞いた。"
+              badge: "Bさん"
+              color: "#0CA678"
+            - description: "ヒアリングを実施しつつ検証を行った。"
+              badge: "検証"
+              color: "#20C997"
+          show_numbers: true
+          card_bg: "#FFFFFF"
+          card_border: "#E9ECEF"

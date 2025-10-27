@@ -1,0 +1,63 @@
+version: 1
+
+meta:
+  title: "2x2マトリクステスト"
+  author: "Test"
+
+theme:
+  primary: "#2196F3"
+  secondary: "#FFC107"
+
+slides:
+  - title: "アドバンテージ・マトリクス - 産業ハイパースケーラー向けAI開発インフラ市場"
+    components:
+      # タイトルは自動追加されるため、メインコンテンツから開始
+      
+      # マトリクス本体
+      - tool: matrix_2x2
+        anchor: center
+        data:
+          title: null  # タイトルはスライドタイトルで表示されるためnull
+          x_axis:
+            label: "競争上の戦略変数の数"
+            low_label: "少ない"
+            high_label: "多い"
+          y_axis:
+            label: "競争優位性構築の可能性"
+            low_label: "小さい"
+            high_label: "大きい"
+          
+          # 象限の定義
+          bottom_left:
+            title: "分散型事業"
+            description: "規模の経済も差別化も限定的。多数の小規模プレイヤーが競合する業界。"
+            color: "#E3F2FD"
+          
+          bottom_right:
+            title: "手詰まり型事業"
+            description: "差別化要因は多いが、持続的な優位性を築きにくい。技術革新が激しく競争が激しい。"
+            color: "#FFF3E0"
+          
+          top_right:
+            title: "特化型事業"
+            description: "深い専門性により独自の地位を築ける。顧客との信頼関係が重要な資産となる。"
+            color: "#C8E6C9"
+          
+          top_left:
+            title: "規模型事業"
+            description: "規模の経済が支配的。大手プレイヤーが市場を牽引する業界構造。"
+            color: "#F3E5F5"
+          
+          # プロットポイント（任意）
+          plot_points:
+            - label: "当社事業"
+              x: 0.75  # 戦略変数が多い
+              y: 0.80  # 優位性構築の可能性が大きい
+              color: "#FF5722"
+          
+          style:
+            axis_label_pt: 14
+            axis_end_label_pt: 11
+            quadrant_title_pt: 16
+            quadrant_desc_pt: 11
+            padding_pct: 8.0
